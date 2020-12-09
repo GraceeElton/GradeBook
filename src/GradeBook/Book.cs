@@ -13,7 +13,7 @@ namespace GradeBook
         public Book(string name)
         {
             grades = new List<double>();
-            this.name = name;
+            Name = name;
         }
 
         // methods 
@@ -47,7 +47,8 @@ namespace GradeBook
 
         // feilds 
         private List<double> grades;
-        private string name;
+        //Public always has an uppercase 
+        public string Name;
 
     }
 }
