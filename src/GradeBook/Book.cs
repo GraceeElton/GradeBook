@@ -4,10 +4,10 @@ using System;
 
 namespace GradeBook
 {
+    public delegate void GradeAddedDelegate(object sender, EventArgs args);
+
     public class Book
     {
-
-
 
         // constructor 
         public Book(string name)
@@ -15,12 +15,8 @@ namespace GradeBook
             grades = new List<double>();
             Name = name;
         }
-
-
-
         // methods 
-
-        public void AddLetterGrade(char letter)
+        public void AddGrade(char letter)
         {
             switch (letter)
             {
@@ -51,6 +47,10 @@ namespace GradeBook
             if (grade <= 100 && grade >= 0)
             {
                 grades.Add(grade);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {
@@ -105,10 +105,22 @@ namespace GradeBook
         }
 
 
+
+        public event GradeAddedDelegate GradeAdded;
         // feilds 
         private List<double> grades;
-        //Public always has an uppercase 
-        public string Name;
+        //Public always has an uppercase name
 
+        public string Name
+        {
+            // getters and setters formant
+            get;
+            // you can use PRIVATE so name is read-only 
+            set;
+
+        }
+
+        // industry norm is to cap the names of all const vaules
+        public const string CATEGORY = "Science";
     }
 }
